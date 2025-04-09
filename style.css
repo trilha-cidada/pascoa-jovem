@@ -1,0 +1,240 @@
+/* Reset básico e Fontes */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f8f0ff, #e6e6fa, #dcd0ff); /* Gradiente suave lilás */
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+    min-height: 100vh; /* Garante que o gradiente cubra a tela */
+}
+
+/* Container Principal */
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: rgba(255, 255, 255, 0.9); /* Fundo branco semi-transparente */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    overflow: hidden; /* Para conter os cantos arredondados */
+    animation: fadeInContainer 1s ease-out; /* Animação de entrada */
+}
+
+/* Cabeçalho */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px dashed #b19cd9; /* Linha pontilhada lilás */
+    padding-bottom: 20px;
+}
+
+header h1 {
+    color: #6a0dad; /* Roxo vibrante */
+    font-weight: 700;
+    font-size: 2.8em;
+    margin-bottom: 5px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+}
+
+header .subtitle {
+    color: #8a2be2; /* Azul violeta */
+    font-size: 1.2em;
+    font-weight: 300;
+}
+
+/* Seção de cada Dia */
+.cronograma {
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Espaço entre os dias */
+}
+
+.dia {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    border-left: 5px solid; /* Borda colorida à esquerda */
+    opacity: 0; /* Começa invisível para animação */
+    transform: translateY(20px); /* Começa um pouco abaixo para animação */
+    animation: fadeInItem 0.6s ease-out forwards;
+    animation-delay: calc(var(--animation-order) * 0.2s); /* Atraso escalonado */
+}
+
+/* Cores específicas por dia */
+#quinta { border-left-color: #8a2be2; --animation-order: 1; } /* Roxo */
+#sexta { border-left-color: #c71585; --animation-order: 2; } /* Rosa escuro */
+#sabado { border-left-color: #ffbf00; --animation-order: 3; } /* Amarelo dourado */
+
+.dia h2 {
+    color: #333;
+    font-weight: 600;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.day-icon {
+    font-size: 1.2em; /* Tamanho do emoji */
+    display: inline-block;
+    animation: bounceIcon 1.5s infinite ease-in-out; /* Animação sutil no ícone */
+}
+
+/* Lista de Atividades */
+.dia ul {
+    list-style: none;
+}
+
+.dia li {
+    display: flex;
+    align-items: center;
+    padding: 15px 10px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    position: relative; /* Para o check-mark absoluto */
+    cursor: pointer; /* Indica clicabilidade */
+}
+
+.dia li:last-child {
+    border-bottom: none;
+}
+
+.dia li:hover {
+    background-color: #f9f9f9;
+    transform: translateX(5px);
+}
+
+/* Estilo da Hora e Atividade */
+.hora {
+    font-weight: 600;
+    color: #6a0dad;
+    min-width: 60px; /* Alinhamento */
+    margin-right: 15px;
+    font-size: 0.95em;
+}
+
+.atividade {
+    flex-grow: 1; /* Ocupa o espaço restante */
+    color: #555;
+    font-size: 1em;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+/* Check Mark Interativo */
+.check-mark {
+    font-size: 1.5em;
+    color: #ccc; /* Cor inicial cinza */
+    margin-left: 15px;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+    user-select: none; /* Impede seleção de texto */
+}
+
+.check-mark:hover {
+    transform: scale(1.2); /* Aumenta um pouco no hover */
+}
+
+/* Estilo para item "concluído" */
+.dia li.completed .atividade {
+    text-decoration: line-through;
+    color: #aaa;
+}
+
+.dia li.completed .check-mark {
+    color: #4caf50; /* Verde para concluído */
+    transform: scale(1.1); /* Leve aumento ao marcar */
+}
+
+/* Rodapé */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+    color: #777;
+    font-size: 0.9em;
+}
+
+/* Animações */
+@keyframes fadeInContainer {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeInItem {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounceIcon {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        margin: 10px;
+    }
+
+    header h1 {
+        font-size: 2.2em;
+    }
+    header .subtitle {
+        font-size: 1em;
+    }
+
+    .dia h2 {
+        font-size: 1.5em;
+    }
+
+    .dia li {
+        padding: 12px 5px;
+        flex-wrap: wrap; /* Quebra linha se necessário em telas pequenas */
+    }
+
+    .hora {
+        min-width: 50px;
+        margin-right: 10px;
+    }
+
+    .atividade {
+        font-size: 0.95em;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.8em;
+    }
+     header .subtitle {
+        font-size: 0.9em;
+    }
+    .dia h2 {
+        font-size: 1.3em;
+    }
+     .dia li {
+        align-items: flex-start; /* Alinha itens no topo em telas muito pequenas */
+    }
+     .hora {
+        margin-bottom: 5px; /* Espaço abaixo da hora se quebrar linha */
+        width: 100%; /* Hora ocupa a linha toda */
+    }
+    .atividade {
+        width: calc(100% - 30px); /* Deixa espaço para o check */
+    }
+     .check-mark {
+        position: absolute;
+        right: 10px;
+        top: 12px; /* Ajusta posição do check */
+    }
+}
